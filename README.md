@@ -7,6 +7,7 @@ sudo apt install cmake
 - [Cmake](https://cmake.org/download/)
 - [beast](https://github.com/boostorg/beast)
 - [jwt-cpp](https://jwt.io/libraries?language=C++)
+- [sqlpp11](https://github.com/rbock/sqlpp11)
 
 
 ## Getting Started

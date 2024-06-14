@@ -1,8 +1,8 @@
-set(RestLib_SourceFiles
+set(RESTLIB_CURRENT_SOURCE
         include/Hello.h
         src/Hello.cpp)
 
-add_library(RestLib ${RestLib_SourceFiles})
+add_library(RestLib ${RESTLIB_CURRENT_SOURCE})
 
 target_include_directories(RestLib
     PUBLIC
@@ -13,3 +13,6 @@ target_include_directories(RestLib
 )
 
 target_link_libraries(RestLib PRIVATE fmt::fmt fmt::fmt-header-only)
+target_link_libraries(RestLib PRIVATE Boost::boost)
+target_link_libraries(RestLib PRIVATE jwt-cpp::jwt-cpp)
+target_link_libraries(RestLib PRIVATE sqlpp11::sqlpp11 sqlpp11::mysql)

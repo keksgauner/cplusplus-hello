@@ -5,6 +5,7 @@
     "dependencies": [
       "fmt",
       "beast",
-      "jwt-cpp"
+      "jwt-cpp",
+      "sqlpp11-connector-mysql"
     ]
   }
