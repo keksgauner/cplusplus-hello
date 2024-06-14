@@ -1,6 +1,6 @@
 set(RestLib_SourceFiles
-        include/Document.h
-        src/Document.cpp)
+        include/Hello.h
+        src/Hello.cpp)
 
 add_library(RestLib ${RestLib_SourceFiles})
 
@@ -13,5 +13,3 @@ target_include_directories(RestLib
 )
 
 target_link_libraries(RestLib PRIVATE fmt::fmt fmt::fmt-header-only)
-
-add_subdirectory(test)
