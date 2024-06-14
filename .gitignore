@@ -1,3 +1,6 @@
+# vcpkg
+vcpkg_installed/
+
 # Normally you wouldn't ignore the .idea folder, but I did it for this project
 .idea/
 

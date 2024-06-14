@@ -11,6 +11,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 # vcpkg dependencies
 find_package(fmt CONFIG REQUIRED)
+find_package(beast CONFIG REQUIRED)
+find_package(jwt CONFIG REQUIRED)
 
 add_subdirectory(lib)
 add_subdirectory(app)

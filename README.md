@@ -5,8 +5,8 @@ sudo apt install cmake
 ## Stack
 - [Docker](https://www.docker.com/)
 - [Cmake](https://cmake.org/download/)
-- [Beast](https://github.com/boostorg/beast)
-- [JWT](https://jwt.io/libraries?language=C++)
+- [beast](https://github.com/boostorg/beast)
+- [jwt-cpp](https://jwt.io/libraries?language=C++)
 
 
 ## Getting Started
