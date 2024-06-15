@@ -39,7 +39,7 @@ cmake --build build
 ## Docker
 
 ```bash
-docker build -f Dockerfile.base -t ubuntubase .
+docker build -f Dockerfile.base -t base .
 ```
 
 ## For CLion users

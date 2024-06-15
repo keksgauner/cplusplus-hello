@@ -1,4 +1,4 @@
-FROM ubuntubase
+FROM base
 
 ENV DEBIAN_FRONTEND=noninteractive
 
