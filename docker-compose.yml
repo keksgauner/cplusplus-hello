@@ -5,6 +5,8 @@ services:
     build: .
     container_name: restapp-backend
     command: ["./build/app/RestApp", "0.0.0.0", "8080"]
+    volumes:
+      - ./build:/app/build
     ports:
       - "8080:8080"
     links:
@@ -14,11 +16,12 @@ services:
 
   postgres-server:
     image: postgres:latest
+    container_name: postgres-server
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_DB: restapp
       POSTGRES_USER: restapp
       POSTGRES_PASSWORD: test123
     volumes:
       - /var/lib/postgresql/data
-    ports:
-      - "5432:5432"
