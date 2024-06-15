@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     zip \
     unzip \
+    autoconf \
+    pkg-config \ 
     && rm -rf /var/lib/apt/lists/*
 
 # install vcpkg
@@ -24,7 +26,8 @@ COPY . .
 
 RUN /vcpkg/vcpkg --feature-flags=manifests install
 
-RUN cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake \
+RUN cmake -B build -S . \
     && cmake --build build
 
-CMD ["./build/app/RestApp"]
+# test the app with 0.0.0.0:8080
+CMD ["./build/app/RestApp", "0.0.0.0", "8080"]

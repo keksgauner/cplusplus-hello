@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
     config->dbname = "restapp";
     config->user = "restapp";
     config->password = "test123";
+    config->host = "localhost";
+    config->port = 5432;
     config->debug = false;
     db_global_init(config);
 

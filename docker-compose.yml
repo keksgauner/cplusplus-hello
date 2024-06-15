@@ -6,8 +6,6 @@ services:
     container_name: restapp-backend
     ports:
       - "8080:8080"
-    volumes:
-      - .:/app
     links:
       - "postgres-server:database"
     depends_on:
