@@ -1,4 +1,4 @@
-FROM base
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -9,10 +9,14 @@ RUN apt update && apt install -y \
     unzip \
     curl \
     git \
-    autoconf
+    autoconf \
+    pkg-config
 
 WORKDIR /app
 COPY . .
+
+# clone vcpkg
+RUN git clone https://github.com/microsoft/vcpkg vcpkg
 
 # install vcpkg and install dependencies
 RUN ./vcpkg/bootstrap-vcpkg.sh

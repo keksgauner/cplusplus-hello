@@ -5,8 +5,6 @@ services:
     build: .
     container_name: restapp-backend
     command: ["./build/app/RestApp", "0.0.0.0", "8080"]
-    volumes:
-      - ./build:/app/build
     ports:
       - "8080:8080"
     links:
