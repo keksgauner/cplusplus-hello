@@ -4,6 +4,7 @@ services:
   restapp-backend:
     build: .
     container_name: restapp-backend
+    command: ["./build/app/RestApp", "0.0.0.0", "8080"]
     ports:
       - "8080:8080"
     links:

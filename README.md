@@ -1,6 +1,4 @@
-```bash
-sudo apt install cmake
-```
+# RestApp
 
 ## Stack
 - [docker](https://www.docker.com/)
@@ -11,6 +9,11 @@ sudo apt install cmake
 
 
 ## Getting Started
+Install requirements on a Ubuntu/Debian system 
+```bash
+sudo apt install build-essential cmake git curl zip unzip autoconf
+```
+
 Clone the repo with the `--recurse-submodules` flag
 ```bash
 git clone --recurse-submodules https://github.com/keksgauner/cplusplus-rest
@@ -31,6 +34,12 @@ cmake -B build -S .
 ```
 ```bash
 cmake --build build
+```
+
+## Docker
+
+```bash
+docker build -f Dockerfile.base -t ubuntubase .
 ```
 
 ## For CLion users

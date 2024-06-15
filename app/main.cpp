@@ -13,27 +13,27 @@ int main(int argc, char *argv[])
 {
     printf("Hello, from DeePay-Backend!\n");
 
-    // Our lib
+    // Our lib test
     Hello helloObj = Hello();
     helloObj.title = "Hello, from DeePay-Backend!";
     helloObj.print(std::cout);
 
-    // jwt example
+    // jwt example test
     std::string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCIsInNhbXBsZSI6InRlc3QifQ.lQm3N2bVlqt2-1L-FsOjtR6uE-L4E9zJutMWKIe1v1M";
     auto decoded = jwt::decode(token);
 
     for (auto &e : decoded.get_payload_json())
         std::cout << e.first << " = " << e.second << std::endl;
 
-    // sqlpp11
+    // sqlpp11 example test
     // Initialize the global connection variable
     auto config = std::make_shared<sqlpp::postgresql::connection_config>();
     config->dbname = "restapp";
     config->user = "restapp";
     config->password = "test123";
-    config->host = "localhost";
+    config->host = "database";
     config->port = 5432;
-    config->debug = false;
+    config->debug = true;
     db_global_init(config);
 
     // Spawn 10 threads and make them send SQL queries in parallel
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
         t.join();
     }
 
-    // Boost beast
+    // Boost beast example test
     // Run the server
     runServer(argc, argv);
 
