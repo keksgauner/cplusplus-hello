@@ -1,12 +1,15 @@
 #include <iostream>
 #include <string>
-#include <memory>
-#include <thread>
 #include <jwt-cpp/jwt.h>
 #include "Hello.h"
-#include <sqlpp11/mysql/mysql.h>
+#include <db_global.h>
+#include <sqlpp11/postgresql/postgresql.h>
+#include <sqlpp11/sqlpp11.h>
+#include <memory>
+#include <thread>
+#include <http_server_small.h>
 
-int main(int, char **)
+int main(int argc, char *argv[])
 {
     printf("Hello, from DeePay-Backend!\n");
 
@@ -24,7 +27,7 @@ int main(int, char **)
 
     // sqlpp11
     // Initialize the global connection variable
-    auto config = std::make_shared<sqlpp::mysql::connection_config>();
+    auto config = std::make_shared<sqlpp::postgresql::connection_config>();
     config->dbname = "restapp";
     config->user = "restapp";
     config->password = "test123";
@@ -41,7 +44,10 @@ int main(int, char **)
                                       {
       for (int j = 0; j < num_queries; ++j)
       {
-        g_dbc(select (sqlpp::value (1).as(sqlpp::alias::a)));
+        // Replace g_dbc with a valid class or namespace
+        // For example:
+        sqlpp::postgresql::connection dbc(config);
+        dbc(select(sqlpp::value(1).as(sqlpp::alias::a)));
       } }));
     }
     for (auto &&t : threads)
@@ -49,36 +55,9 @@ int main(int, char **)
         t.join();
     }
 
-    // Boost Beast
-    try
-    {
-        // Check command line arguments.
-        if (argc != 3)
-        {
-            std::cerr << "Usage: " << argv[0] << " <address> <port>\n";
-            std::cerr << "  For IPv4, try:\n";
-            std::cerr << "    receiver 0.0.0.0 80\n";
-            std::cerr << "  For IPv6, try:\n";
-            std::cerr << "    receiver 0::0 80\n";
-            return EXIT_FAILURE;
-        }
-
-        auto const address = net::ip::make_address(argv[1]);
-        unsigned short port = static_cast<unsigned short>(std::atoi(argv[2]));
-
-        net::io_context ioc{1};
-
-        tcp::acceptor acceptor{ioc, {address, port}};
-        tcp::socket socket{ioc};
-        http_server(acceptor, socket);
-
-        ioc.run();
-    }
-    catch (std::exception const &e)
-    {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return EXIT_FAILURE;
-    }
+    // Boost beast
+    // Run the server
+    runServer(argc, argv);
 
     return 0;
 }

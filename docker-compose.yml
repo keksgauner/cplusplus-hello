@@ -9,19 +9,17 @@ services:
     volumes:
       - .:/app
     links:
-      - "mariadb-server:database"
+      - "postgres-server:database"
     depends_on:
-      - mariadb-server
+      - postgres-server
 
-  mariadb-server:
-    image: mariadb:latest
-    container_name: mariadb-server
+  postgres-server:
+    image: postgres:latest
     environment:
-      MYSQL_ROOT_PASSWORD: test123
-      MYSQL_USER: restapp
-      MYSQL_PASSWORD: test123
-      MYSQL_DATABASE: restapp
-    ports:
-      - "3306:3306"
+      POSTGRES_DB: restapp
+      POSTGRES_USER: restapp
+      POSTGRES_PASSWORD: test123
     volumes:
-      - /var/lib/mysql
+      - /var/lib/postgresql/data
+    ports:
+      - "5432:5432"

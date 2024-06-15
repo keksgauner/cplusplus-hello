@@ -10,6 +10,6 @@ db_connection::pq_conn &db_connection::fetch()
     return *m_conn_ptr;
 }
 
-db_connection::db_connection(sqlpp::mysql::connection_pool &pool) : m_pool{pool}, m_conn_ptr{nullptr}
+db_connection::db_connection(sqlpp::postgresql::connection_pool &pool) : m_pool{pool}, m_conn_ptr{nullptr}
 {
 }

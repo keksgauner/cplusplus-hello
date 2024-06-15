@@ -1,20 +1,20 @@
 #pragma once
 
-#include <sqlpp11/mysql/mysql.h>
+#include <sqlpp11/postgresql/postgresql.h>
 
 class db_connection
 {
 private:
-    using pq_conn = sqlpp::mysql::pooled_connection;
+    using pq_conn = sqlpp::postgresql::pooled_connection;
 
-    sqlpp::mysql::connection_pool &m_pool;
+    sqlpp::postgresql::connection_pool &m_pool;
     // For C++17 or newer just use std::optional<pq_conn> m_conn;
     std::unique_ptr<pq_conn> m_conn_ptr;
 
     pq_conn &fetch();
 
 public:
-    db_connection(sqlpp::mysql::connection_pool &pool);
+    db_connection(sqlpp::postgresql::connection_pool &pool);
     db_connection(const db_connection &) = delete;
     db_connection(db_connection &&) = delete;
 

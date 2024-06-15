@@ -7,8 +7,8 @@
       "beast",
       "jwt-cpp",
       {
-        "name": "sqlpp11",
-        "features": ["mariadb"]
+          "name": "sqlpp11",
+          "features": ["postgresql", "sqlite3"]
       }
     ]
   }

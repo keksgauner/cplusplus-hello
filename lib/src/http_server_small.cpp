@@ -1,10 +1,3 @@
-#include <stdio.h>
-#include <jwt-cpp/jwt.h>
-#include <iostream>
-#include <Hello.h>
-#include <sqlpp11/sqlpp11.h>
-#include <memory>
-#include <thread>
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
 #include <boost/beast/version.hpp>
@@ -13,8 +6,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <memory>
 #include <string>
-#include "db_global.h"
 
 namespace beast = boost::beast;   // from <boost/beast.hpp>
 namespace http = beast::http;     // from <boost/beast/http.hpp>
@@ -205,4 +198,37 @@ void http_server(tcp::acceptor &acceptor, tcp::socket &socket)
                                   std::make_shared<http_connection>(std::move(socket))->start();
                               http_server(acceptor, socket);
                           });
+}
+
+int runServer(int argc, char *argv[])
+{
+    try
+    {
+        // Check command line arguments.
+        if (argc != 3)
+        {
+            std::cerr << "Usage: " << argv[0] << " <address> <port>\n";
+            std::cerr << "  For IPv4, try:\n";
+            std::cerr << "    receiver 0.0.0.0 80\n";
+            std::cerr << "  For IPv6, try:\n";
+            std::cerr << "    receiver 0::0 80\n";
+            return EXIT_FAILURE;
+        }
+
+        auto const address = net::ip::make_address(argv[1]);
+        unsigned short port = static_cast<unsigned short>(std::atoi(argv[2]));
+
+        net::io_context ioc{1};
+
+        tcp::acceptor acceptor{ioc, {address, port}};
+        tcp::socket socket{ioc};
+        http_server(acceptor, socket);
+
+        ioc.run();
+    }
+    catch (std::exception const &e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
 }
