@@ -3,10 +3,10 @@ sudo apt install cmake
 ```
 
 ## Stack
-- [Docker](https://www.docker.com/)
-- [Cmake](https://cmake.org/download/)
+- [docker](https://www.docker.com/)
+- [cmake](https://cmake.org/download/)
 - [beast](https://github.com/boostorg/beast)
-- [jwt-cpp](https://jwt.io/libraries?language=C++)
+- [jwt-cpp](https://github.com/Thalhammer/jwt-cpp)
 - [sqlpp11](https://github.com/rbock/sqlpp11)
 
 

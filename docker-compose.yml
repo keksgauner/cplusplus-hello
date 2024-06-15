@@ -1,9 +1,27 @@
 version: '3.8'
 
 services:
-  myproject:
+  restapp-backend:
     build: .
-    container_name: RestApp
+    container_name: restapp-backend
+    ports:
+      - "8080:8080"
     volumes:
       - .:/app
-    command: ["./build/app/RestApp"]
+    links:
+      - "mariadb-server:database"
+    depends_on:
+      - mariadb-server
+
+  mariadb-server:
+    image: mariadb:latest
+    container_name: mariadb-server
+    environment:
+      MYSQL_ROOT_PASSWORD: test123
+      MYSQL_USER: restapp
+      MYSQL_PASSWORD: test123
+      MYSQL_DATABASE: restapp
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql

@@ -6,6 +6,9 @@
       "fmt",
       "beast",
       "jwt-cpp",
-      "sqlpp11-connector-mysql"
+      {
+        "name": "sqlpp11",
+        "features": ["mariadb"]
+      }
     ]
   }
