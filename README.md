@@ -32,14 +32,27 @@ Build the project using your IDE/build tool of choice or manually:
 ```bash
 cmake -B build -S .
 ```
+
+Make sure you set the correct vcpkg ToolChain file path
+
+```bash
+cmake -B build -S . -D CMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+```
+
 ```bash
 cmake --build build
 ```
 
 ## Docker
 
+Building
 ```bash
-docker build -f Dockerfile.base -t base .
+docker build -t restapi-image .
+```
+
+Running
+```bash
+docker run -it --name restapi restapi-image
 ```
 
 ## For CLion users

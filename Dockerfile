@@ -23,13 +23,12 @@ ENV CMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake
 WORKDIR /app
 COPY . .
 
-# install vcpkg and install dependencies
-RUN ./vcpkg/bootstrap-vcpkg.sh
-RUN ./vcpkg/vcpkg --feature-flags=manifests install
+# install vcpkg dependencies
+RUN /vcpkg/vcpkg --feature-flags=manifests install
 
 # build the app
 RUN cmake -B build -S . \
-    -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake
+    -D CMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake
 RUN cmake --build build
 
 # start the app

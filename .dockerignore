@@ -1,6 +1,9 @@
 Dockerfile
 docker-compose.yml
 
+# Ignore build files
+/build
+
 # Ignore vcpkg
 /vcpkg
 /vcpkg_installed*/
