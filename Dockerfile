@@ -12,19 +12,19 @@ RUN apt update && apt install -y \
     autoconf \
     pkg-config
 
-# install vcpkg
-RUN git clone https://github.com/microsoft/vcpkg.git /vcpkg
-RUN /vcpkg/bootstrap-vcpkg.sh
-
 WORKDIR /app
 COPY . .
 
+# install vcpkg
+RUN git submodule init && \
+    git submodule update
+RUN ./vcpkg/bootstrap-vcpkg.sh
+
 # install vcpkg dependencies
-RUN /vcpkg/vcpkg --feature-flags=manifests install
+RUN ./vcpkg/vcpkg --feature-flags=manifests install
 
 # build the app
-RUN cmake -B build -S . \
-    -D CMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake
+RUN cmake -B build -S .
 RUN cmake --build build
 
 # start the app

@@ -1,21 +1,27 @@
 #include <iostream>
 #include <string>
 #include <jwt-cpp/jwt.h>
-#include "Hello.h"
 #include <db_global.h>
 #include <sqlpp11/postgresql/postgresql.h>
 #include <sqlpp11/sqlpp11.h>
 #include <memory>
 #include <thread>
 #include <http_server_small.h>
+#include <Document.h>
 
 void ourLibTest()
 {
     printf("OurLib Test\n");
 
-    Hello helloObj = Hello();
-    helloObj.title = "Hello, from RestApp-Backend!";
-    helloObj.print(std::cout);
+    Document doc = {
+        "Author",
+        std::time(nullptr),
+        "Title",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+        " incididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam, quis nostrud"
+        " exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."};
+
+    doc.print(std::cout);
 }
 
 void jwtTest()
