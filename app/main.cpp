@@ -49,8 +49,8 @@ void jwtTest()
     }
 
     // Decode the token
-    std::string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCIsInNhbXBsZSI6InRlc3QifQ.lQm3N2bVlqt2-1L-FsOjtR6uE-L4E9zJutMWKIe1v1M";
-    auto decoded = jwt::decode(token);
+    std::string other_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCIsInNhbXBsZSI6InRlc3QifQ.lQm3N2bVlqt2-1L-FsOjtR6uE-L4E9zJutMWKIe1v1M";
+    auto decoded = jwt::decode(other_token);
 
     for (auto &e : decoded.get_payload_json())
         std::cout << e.first << " = " << e.second << std::endl;
@@ -95,7 +95,8 @@ void sqlpp11Test()
 void beastBoostTest()
 {
     printf("Beast Test - https://github.com/boostorg/beast/tree/develop/example/http/server/small\n");
-    runServer(2, new char *[2]{"0.0.0.0", "80"});
+    const char *serverArgs[] = {"", "0.0.0.0", "8080"};
+    runServer(3, const_cast<char **>(serverArgs));
 }
 
 int main(int argc, char *argv[])
@@ -104,6 +105,7 @@ int main(int argc, char *argv[])
 
     ourLibTest();
     jwtTest();
+    sqlpp11Test();
     beastBoostTest();
 
     return 0;
