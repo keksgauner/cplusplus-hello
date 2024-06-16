@@ -46,6 +46,12 @@ cmake --build build
 ```
 
 ## Docker
+Either build or compose, it is possible.
+Compose
+```bash
+docker compose up -d
+```
+or 
 
 Building
 ```bash
