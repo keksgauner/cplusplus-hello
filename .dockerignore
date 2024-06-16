@@ -3,6 +3,7 @@ docker-compose.yml
 
 # Ignore build files
 /build
+/Testing
 
 # Ignore vcpkg
 /vcpkg

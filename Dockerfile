@@ -16,10 +16,6 @@ RUN apt update && apt install -y \
 RUN git clone https://github.com/microsoft/vcpkg.git /vcpkg
 RUN /vcpkg/bootstrap-vcpkg.sh
 
-# vcpkg toolchain file
-ENV VCPKG_ROOT=/vcpkg
-ENV CMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake
-
 WORKDIR /app
 COPY . .
 

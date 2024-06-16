@@ -9,23 +9,57 @@
 #include <thread>
 #include <http_server_small.h>
 
-int main(int argc, char *argv[])
+void ourLibTest()
 {
-    printf("Hello, from DeePay-Backend!\n");
+    printf("OurLib Test\n");
 
-    // Our lib test
     Hello helloObj = Hello();
-    helloObj.title = "Hello, from DeePay-Backend!";
+    helloObj.title = "Hello, from RestApp-Backend!";
     helloObj.print(std::cout);
+}
 
-    // jwt example test
+void jwtTest()
+{
+    printf("JWT Test - https://github.com/Thalhammer/jwt-cpp/tree/master/example\n");
+
+    // Create a new token with HS256 algorithm
+    auto key = "good-secret";
+
+    auto token = jwt::create()
+                     .set_issuer("auth0")
+                     .set_type("JWS")
+                     .set_payload_claim("sample", jwt::claim(std::string("test")))
+                     .sign(jwt::algorithm::hs256{key});
+
+    std::cout << token << std::endl;
+
+    // Verify the token
+    try
+    {
+        auto decoded = jwt::decode(token);
+        auto verifier = jwt::verify()
+                            .allow_algorithm(jwt::algorithm::hs256{key})
+                            .with_issuer("auth0");
+        verifier.verify(decoded);
+        std::cout << "Verified token" << std::endl;
+    }
+    catch (const std::runtime_error &e)
+    {
+        std::cout << "Error verifying token: " << e.what() << std::endl;
+    }
+
+    // Decode the token
     std::string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJpc3MiOiJhdXRoMCIsInNhbXBsZSI6InRlc3QifQ.lQm3N2bVlqt2-1L-FsOjtR6uE-L4E9zJutMWKIe1v1M";
     auto decoded = jwt::decode(token);
 
     for (auto &e : decoded.get_payload_json())
         std::cout << e.first << " = " << e.second << std::endl;
+}
 
-    // sqlpp11 example test
+void sqlpp11Test()
+{
+    printf("SQLpp11 Test - https://github.com/rbock/sqlpp11/tree/main/examples/connection_pool\n");
+
     // Initialize the global connection variable
     auto config = std::make_shared<sqlpp::postgresql::connection_config>();
     config->dbname = "restapp";
@@ -56,10 +90,21 @@ int main(int argc, char *argv[])
     {
         t.join();
     }
+}
 
-    // Boost beast example test
-    // Run the server
-    runServer(argc, argv);
+void beastBoostTest()
+{
+    printf("Beast Test - https://github.com/boostorg/beast/tree/develop/example/http/server/small\n");
+    runServer(2, new char *[2]{"0.0.0.0", "80"});
+}
+
+int main(int argc, char *argv[])
+{
+    printf("Hello, from RestApp-Backend!\n");
+
+    ourLibTest();
+    jwtTest();
+    beastBoostTest();
 
     return 0;
 }

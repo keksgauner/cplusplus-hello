@@ -15,4 +15,6 @@ target_include_directories(RestLib
 
 target_include_directories(RestLib PRIVATE ${JWT_CPP_INCLUDE_DIRS})
 
-target_link_libraries(RestLib PRIVATE fmt::fmt fmt::fmt-header-only Boost::beast sqlpp11::sqlite3 sqlpp11::postgresql)
+target_link_libraries(RestLib PRIVATE fmt::fmt fmt::fmt-header-only)
+target_link_libraries(RestLib PRIVATE Boost::beast)
+target_link_libraries(RestLib PRIVATE sqlpp11::sqlite3 sqlpp11::postgresql)

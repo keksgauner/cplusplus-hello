@@ -1,6 +1,8 @@
-# RestApp
+# C++ Rest Cmake Example
 
-## Stack
+This is a example stack with cmake based on [cmake-vcpkg-example](https://github.com/miredirex/cmake-vcpkg-example)
+
+## Used software tools and libaries
 - [docker](https://www.docker.com/)
 - [cmake](https://cmake.org/download/)
 - [beast](https://github.com/boostorg/beast)
@@ -16,7 +18,7 @@ sudo apt install build-essential cmake git curl zip unzip autoconf
 
 Clone the repo with the `--recurse-submodules` flag
 ```bash
-git clone --recurse-submodules https://github.com/keksgauner/cplusplus-rest
+git clone --recurse-submodules https://github.com/keksgauner/cplusplus-rest-example
 ```  
 
 Run `./vcpkg/bootstrap-vcpkg.sh` or `.\vcpkg\bootstrap-vcpkg.bat`
@@ -33,7 +35,7 @@ Build the project using your IDE/build tool of choice or manually:
 cmake -B build -S .
 ```
 
-Make sure you set the correct vcpkg ToolChain file path
+Make sure you set the correct vcpkg toolchain file path
 
 ```bash
 cmake -B build -S . -D CMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
